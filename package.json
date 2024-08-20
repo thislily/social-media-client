@@ -7,8 +7,9 @@
     "build": "sass src/scss:dist/css & prettier --write src/scss & webpack",
     "start": "sass --watch src/scss:dist/css & live-server & webpack serve --mode development",
     "lint": "eslint .",
-    "test": "jest",
-    "cypress:open": "cypress open"
+    "test-jest": "jest",
+    "test-cypress": "npm run test-e2e",
+    "test-e2e": "cypress open"
   },
   "keywords": [],
   "author": "Noroff",
