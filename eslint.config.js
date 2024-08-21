@@ -3,7 +3,6 @@ const pluginJs = require('@eslint/js');
 const eslintPluginCypress = require('eslint-plugin-cypress');
 const { FlatCompat } = require('@eslint/eslintrc');
 
-// Initialize compatibility layer for older configs
 const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
@@ -16,24 +15,23 @@ module.exports = [
       sourceType: 'module',
     },
     plugins: {
-      cypress: eslintPluginCypress, // Correctly define the plugin as an object
+      cypress: eslintPluginCypress, // Ensure this is an object, not an array
     },
     rules: {
       // General ESLint rules can be added or customized here
     },
   },
-  // Directly include recommended configs without using "extends"
   pluginJs.configs.recommended,
   eslintPluginCypress.configs.recommended,
   {
     overrides: [
       {
-        files: ['**/*.cy.js'], // Target Cypress test files
+        files: ['**/*.cy.js'],
         env: {
           'cypress/globals': true,
         },
         plugins: {
-          cypress: eslintPluginCypress, // Correctly define the plugin as an object
+          cypress: eslintPluginCypress, // Ensure this is an object, not an array
         },
         rules: {
           'cypress/no-unnecessary-waiting': 'off',
