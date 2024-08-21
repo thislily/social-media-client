@@ -10,10 +10,10 @@ export default [
       sourceType: 'module',
     },
     plugins: {
-      cypress: eslintPluginCypress,
+      cypress: eslintPluginCypress, // Correct format for plugins in flat config
     },
     rules: {
-      // Add or customize rules here
+      // General rules can be added here
     },
   },
   // Directly include the recommended configs without using "extends"
@@ -27,7 +27,7 @@ export default [
           'cypress/globals': true,
         },
         plugins: {
-          cypress: eslintPluginCypress,
+          cypress: eslintPluginCypress, // Correct format for plugins in overrides
         },
         rules: {
           'cypress/no-unnecessary-waiting': 'off', // Disable specific Cypress rule
