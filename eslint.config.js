@@ -1,13 +1,11 @@
-// CommonJS syntax
 const globals = require('globals');
 const pluginJs = require('@eslint/js');
 const eslintPluginCypress = require('eslint-plugin-cypress');
 const { FlatCompat } = require('@eslint/eslintrc');
-const path = require('path');
 
 // Initialize compatibility layer for older configs
 const compat = new FlatCompat({
-  baseDirectory: __dirname, // CommonJS provides __dirname by default
+  baseDirectory: __dirname,
 });
 
 module.exports = [
@@ -18,13 +16,13 @@ module.exports = [
       sourceType: 'module',
     },
     plugins: {
-      cypress: eslintPluginCypress,
+      cypress: eslintPluginCypress, // Correctly define the plugin as an object
     },
     rules: {
       // General ESLint rules can be added or customized here
     },
   },
-  // Include traditional configs with compatibility utility
+  // Directly include recommended configs without using "extends"
   pluginJs.configs.recommended,
   eslintPluginCypress.configs.recommended,
   {
@@ -35,7 +33,7 @@ module.exports = [
           'cypress/globals': true,
         },
         plugins: {
-          cypress: eslintPluginCypress,
+          cypress: eslintPluginCypress, // Correctly define the plugin as an object
         },
         rules: {
           'cypress/no-unnecessary-waiting': 'off',
