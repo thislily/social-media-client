@@ -1,10 +1,11 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import globals from 'globals';
+import pluginJs from '@eslint/js';
 import eslintPluginCypress from 'eslint-plugin-cypress';
+import { FlatCompat } from '@eslint/eslintrc';
 
-// Initialize compatibility layer
+// Initialize compatibility layer for older configs
 const compat = new FlatCompat({
-  baseDirectory: __dirname, // Required to locate the config files
+  baseDirectory: __dirname,
 });
 
 export default [
@@ -18,18 +19,21 @@ export default [
       cypress: eslintPluginCypress,
     },
     rules: {
-      // Add or customize rules here
+      // General ESLint rules can be added or customized here
     },
   },
-  // Include traditional .eslintrc configurations wrapped for flat config compatibility
-  ...compat.extends('eslint:recommended'),
-  ...compat.extends('plugin:cypress/recommended'),
+  // Include traditional configs with compatibility utility
+  pluginJs.configs.recommended,
+  eslintPluginCypress.configs.recommended,
   {
     overrides: [
       {
-        files: ['**/*.cy.js'],
+        files: ['**/*.cy.js'], // Target Cypress test files
         env: {
           'cypress/globals': true,
+        },
+        plugins: {
+          cypress: eslintPluginCypress,
         },
         rules: {
           'cypress/no-unnecessary-waiting': 'off',
@@ -39,3 +43,4 @@ export default [
     ],
   },
 ];
+
