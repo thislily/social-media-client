@@ -21,8 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Start server and run Cypress tests
+      - name: Start server and wait for it to be ready
         run: |
-          npm start &
-          npx wait-on http://localhost:3000
-          npm run test-cypress
+          npm start &  # Start the server in the background
+          npx wait-on http://localhost:8081  # Wait for the server to be ready
+
+      - name: Run Cypress tests
+        run: npm run test-cypress
