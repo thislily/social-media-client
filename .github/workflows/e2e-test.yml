@@ -1,0 +1,28 @@
+name: Automated E2E Testing
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  run-e2e-tests:
+    name: Run E2E Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start server and run Cypress tests
+        run: |
+          npm start &
+          npx wait-on http://localhost:3000
+          npm run test-cypress
