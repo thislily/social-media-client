@@ -1,14 +1,16 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import eslintPluginCypress from 'eslint-plugin-cypress';
-import { FlatCompat } from '@eslint/eslintrc';
+// CommonJS syntax
+const globals = require('globals');
+const pluginJs = require('@eslint/js');
+const eslintPluginCypress = require('eslint-plugin-cypress');
+const { FlatCompat } = require('@eslint/eslintrc');
+const path = require('path');
 
 // Initialize compatibility layer for older configs
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  baseDirectory: __dirname, // CommonJS provides __dirname by default
 });
 
-export default [
+module.exports = [
   {
     languageOptions: {
       globals: globals.browser,
