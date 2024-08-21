@@ -1,41 +1,39 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import eslintPluginCypress from "eslint-plugin-cypress";
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import eslintPluginCypress from 'eslint-plugin-cypress';
 
 export default [
   {
     languageOptions: {
       globals: globals.browser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
     },
     plugins: {
       cypress: eslintPluginCypress,
     },
     rules: {
-      // Optionally, add or customize any rules here
+      // Add or customize rules here
     },
   },
+  // Directly include the recommended configs without using "extends"
+  pluginJs.configs.recommended,
+  eslintPluginCypress.configs.recommended,
   {
-    extends: [
-      pluginJs.configs.recommended,
-      "plugin:cypress/recommended", // Use Cypress recommended rules
-    ],
     overrides: [
       {
-        files: ["**/*.cy.js"], // Match files with .cy.js extension
+        files: ['**/*.cy.js'], // Match files with .cy.js extension
         env: {
-          "cypress/globals": true,
+          'cypress/globals': true,
         },
-        plugins: ["cypress"],
-        extends: ["plugin:cypress/recommended"],
+        plugins: {
+          cypress: eslintPluginCypress,
+        },
         rules: {
-          "cypress/no-unnecessary-waiting": "off", // Disable specific Cypress rule
-          "no-unused-vars": "off", // Disable specific rule
+          'cypress/no-unnecessary-waiting': 'off', // Disable specific Cypress rule
+          'no-unused-vars': 'off', // Disable specific rule
         },
       },
     ],
-    parserOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-    },
   },
 ];
