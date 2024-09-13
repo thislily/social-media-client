@@ -51,7 +51,7 @@ jobs:
         run: npm start & # Run server in the background
 
       - name: Wait for the server to be ready
-        run: npx wait-on http://127.0.0.1:5500
-
+        run: npx wait-on http://localhost:8081
+        
       - name: Run Cypress tests
         run: npx cypress run
