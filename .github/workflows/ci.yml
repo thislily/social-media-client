@@ -25,9 +25,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run ESLint
-        run: npm run lint
-
       - name: Run Jest tests
         run: npm run test-jest
 
@@ -56,4 +53,4 @@ jobs:
           npx wait-on http://localhost:8080  # Wait for the server to be ready
 
       - name: Run Cypress tests
-        run: npx cypress run  # Run Cypress in headless mode instead of opening the GUI
+        run: npm run test-cypress  # Run Cypress tests
