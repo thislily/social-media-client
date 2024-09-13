@@ -1,5 +1,5 @@
 name: CI Pipeline
- 
+
 on:
   push:
     branches:
@@ -8,45 +8,50 @@ on:
     branches:
       - Workflow
   workflow_dispatch:
- 
+
 jobs:
   build:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
- 
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
- 
+
       - name: Install dependencies
         run: npm install
- 
+
       - name: Run Jest tests
         run: npm run test-jest
- 
+
       - name: Build project
         run: npm run build
- 
+
   cypress:
     runs-on: ubuntu-latest
     needs: build
- 
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
- 
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
- 
+
       - name: Install dependencies
         run: npm install
- 
+
+      - name: Start the development server
+        run: npm start & # Run server in the background
+
+      - name: Wait for the server to be ready
+        run: npx wait-on http://127.0.0.1:5500
+
       - name: Run Cypress tests
-        #run: npm run test-cypress  # Run Cypress tests
         run: npx cypress run
