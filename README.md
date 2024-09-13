@@ -31,10 +31,21 @@
    ```bash
    npm run build
 
+6. Run Jest tests:
+   ```bash
+   npm run test-jest
+
+7. Run Cypress end-to-end tests:
+   ```bash
+   npm run test-cypress
+
+
+
 
 ## Automatic Testing
 GitHub Actions will automatically run both unit and E2E tests whenever you create a pull request. It is unfortunately not working right now. I tried my best.
 [![CI Pipeline](https://github.com/thislily/social-media-client/actions/workflows/ci.yml/badge.svg)](https://github.com/thislily/social-media-client/actions/workflows/ci.yml)
+
 
 ## Contributing
 We welcome contributions to improve the Social Media Client. To contribute:
