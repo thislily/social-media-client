@@ -45,7 +45,7 @@
 
 
 ## Automatic Testing
-GitHub Actions will automatically run both unit and E2E tests whenever you create a pull request. It is unfortunately not working right now. I tried my best.
+GitHub Actions will automatically run both unit and E2E tests whenever you create a pull request.
 [![CI Pipeline](https://github.com/thislily/social-media-client/actions/workflows/ci.yml/badge.svg)](https://github.com/thislily/social-media-client/actions/workflows/ci.yml)
 
 
